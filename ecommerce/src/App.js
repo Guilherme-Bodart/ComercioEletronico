@@ -8,14 +8,26 @@ import {
 } from "react-router-dom";
 
 import Principal from './pages/Principal/Principal';
+import Login from './pages/Login/Login';
 // import { pageLogin, pageCadastrar, pageRecuperar } from './store/actions/pages/page'
 
 class App extends Component{
   render(props){
     return (
         <Switch>
-          <Route path="/">
-            <Principal />
+          <Route exact path="/" >
+            <Redirect to="/home">              
+            </Redirect>
+          </Route>
+          <Route exact path="/home">
+            <Principal/>
+          </Route>
+          <Route exact path="/login">
+            <Login />
+          </Route>
+          <Route >
+            <Redirect to="/home">
+            </Redirect>
           </Route>
           
         </Switch>

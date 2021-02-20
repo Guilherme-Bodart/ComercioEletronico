@@ -4,6 +4,9 @@ import { connect } from 'react-redux';
 import '../../styles/principal.css'
 
 
+import NavbarP from "../../components/Navbar/Navbar"
+import Carrossel from "../../components/Carrossel/Carrossel"
+
 const initialState = {
 }
 
@@ -15,10 +18,10 @@ class Principal extends Component {
 
     render(props){
       return(
-        <div style={{ backgroundColor:'rgba(220,220,220,0.7)',}} >
-            AAAAAAAA
-        </div>
-        
+          <>
+            <NavbarP/>
+            <Carrossel/>
+          </>
         
       )
     }
