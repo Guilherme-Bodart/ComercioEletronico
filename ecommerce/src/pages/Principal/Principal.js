@@ -6,6 +6,7 @@ import '../../styles/principal.css'
 
 import NavbarP from "../../components/Navbar/Navbar"
 import Carrossel from "../../components/Carrossel/Carrossel"
+import Favoritos from "../../components/Favoritos/Favoritos"
 
 const initialState = {
 }
@@ -21,6 +22,7 @@ class Principal extends Component {
           <>
             <NavbarP/>
             <Carrossel/>
+            <Favoritos/>
           </>
         
       )

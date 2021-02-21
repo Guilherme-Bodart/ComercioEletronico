@@ -9,26 +9,18 @@ import logo from "../../assets/logo2.png"
 import '../../styles/Login.css'
 
 const initialState = {
-  pageC:1,
-  pageE:1
-
+  pageL:0
 }
 
-class Principal extends Component {
+class NovaSenha extends Component {
     constructor(props) {
         super(props)
         this.state = initialState
     }
 
-    onChangePageC = (pageC) => {
+    onChangePageL = (pageL) => {
       this.setState({
-        pageC
-     })
-    }
-
-    onChangePageE = (pageE) => {
-      this.setState({
-        pageE
+        pageL
      })
     }
 
@@ -45,11 +37,9 @@ class Principal extends Component {
       // if(this.state.logado && this.props.usuario.permissao==1){
       //   return <Redirect to ="/user"/>
       // }
-      if(this.state.pageC==0){
-        return <Redirect to ="/cadastro"/>
-      }
-      if(this.state.pageE==2){
-        return <Redirect to ="/recuperar"/>
+
+      if(this.state.pageL==1){
+        return <Redirect to ="/login"/>
       }
   
       return (
@@ -58,10 +48,10 @@ class Principal extends Component {
             
             <Image src={logo} className="App-logo " alt="logo" />
             <Form className="App-form " onSubmit={this.handleSubmit} >
-              <Form.Label className="App-text">Fazer Login</Form.Label>
+              <Form.Label className="App-text" style={{width:"9em"}}>Recuperar senha</Form.Label>
               <Form.Group controlId="formBasicEmail" className="App-form-group">
-                <Form.Label>E-mail</Form.Label>
-                <Form.Control type="email" placeholder="Entre com seu e-mail"
+                <Form.Label style={{color:"#E87715", marginLeft:"-15em",marginTop:"1em"}}>Nova senha</Form.Label>
+                <Form.Control type="email" placeholder="Nova senha"
                     className="App-form-control"  
                     // onChange = {value => this.onChangeEmail(value)}
                     />
@@ -70,8 +60,8 @@ class Principal extends Component {
               </Form.Group>
   
               <Form.Group controlId="formBasicPassword" className="App-form-group">
-                <Form.Label >Senha</Form.Label>
-                <Form.Control type="password" placeholder="Senha" 
+                <Form.Label style={{color:"#E87715", marginRight:"10em"}}>Confirmação da Senha</Form.Label>
+                <Form.Control type="password" placeholder="Confirmar nova senha" 
                 className="App-form-control" 
                 // onChange = {value => this.onChangeSenha(value)}
                 />
@@ -92,22 +82,15 @@ class Principal extends Component {
                 <p className="App-text-button">Entrar</p>
               </Button>
               <Button variant="outline-secondary" className="App-button-login" 
-                      onClick={ () => {
-                          this.onChangePageC(0)
+                          onClick={ () => {
+                            this.onChangePageL(1)
                         }
                       }
                       >
-                <p className="App-text-button">Crie sua conta</p>
+                <p className="App-text-button">Voltar ao Login</p>
               </Button>
               
             </Form>
-            <Button variant="link" className="App-button-link" style={{color:"#E87715"}}
-                      onClick={ () => {
-                        this.onChangePageE(2)
-                    }}
-                    >
-                <p className="App-text-button">Esqueceu sua senha?</p>
-              </Button>
   
           </header>
         </div>
@@ -126,4 +109,4 @@ const mapStateToProps = ({ }) => {
     return {
     }
   }
-  export default connect(mapStateToProps, mapDispatchToProps)(Principal)
+  export default connect(mapStateToProps, mapDispatchToProps)(NovaSenha)

@@ -27,6 +27,14 @@
     border-radius: 1em;
 }
 
+.App-form-cadastro {
+    margin-top: 1em;
+    height: 30em;
+    width: 40em;
+    border: 1px solid #ccc;
+    border-radius: 1em;
+}
+
 .App-text {
     color: #666;
     margin-top: 1em;
@@ -45,6 +53,8 @@
 
 .App-form-groupC{
     width: 14em;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .App-form-labelC{

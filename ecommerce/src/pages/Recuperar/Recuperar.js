@@ -9,58 +9,36 @@ import logo from "../../assets/logo2.png"
 import '../../styles/Login.css'
 
 const initialState = {
-  pageC:1,
-  pageE:1
-
+  pageL:0
 }
 
-class Principal extends Component {
+class Recuperar extends Component {
     constructor(props) {
         super(props)
         this.state = initialState
     }
 
-    onChangePageC = (pageC) => {
+    onChangePageL = (pageL) => {
       this.setState({
-        pageC
-     })
-    }
-
-    onChangePageE = (pageE) => {
-      this.setState({
-        pageE
+        pageL
      })
     }
 
     render(props){
-      // if(this.props.page.page === "cadastro"){
-      //   return <Redirect to ="/cadastro"/>
-      // }
-      // if(this.props.page.page === "enviarEmail"){
-      //   return <Redirect to ="/enviarEmail"/>
-      // }
-      // if(this.state.logado && this.props.usuario.permissao==2){
-      //   return <Redirect to ="/admin"/>
-      // }
-      // if(this.state.logado && this.props.usuario.permissao==1){
-      //   return <Redirect to ="/user"/>
-      // }
-      if(this.state.pageC==0){
-        return <Redirect to ="/cadastro"/>
+      
+      if(this.state.pageL==1){
+        return <Redirect to ="/login"/>
       }
-      if(this.state.pageE==2){
-        return <Redirect to ="/recuperar"/>
-      }
-  
+
       return (
         <div className="App">
           <header className="App-header">
             
             <Image src={logo} className="App-logo " alt="logo" />
             <Form className="App-form " onSubmit={this.handleSubmit} >
-              <Form.Label className="App-text">Fazer Login</Form.Label>
+              <Form.Label className="App-text" style={{width:"10em"}}>E-mail da sua conta</Form.Label>
               <Form.Group controlId="formBasicEmail" className="App-form-group">
-                <Form.Label>E-mail</Form.Label>
+                <Form.Label style={{color:"#E87715", marginTop:"2em", marginLeft:"-12em"}}>Informe seu e-mail</Form.Label>
                 <Form.Control type="email" placeholder="Entre com seu e-mail"
                     className="App-form-control"  
                     // onChange = {value => this.onChangeEmail(value)}
@@ -69,15 +47,8 @@ class Principal extends Component {
                 </Form.Text>
               </Form.Group>
   
-              <Form.Group controlId="formBasicPassword" className="App-form-group">
-                <Form.Label >Senha</Form.Label>
-                <Form.Control type="password" placeholder="Senha" 
-                className="App-form-control" 
-                // onChange = {value => this.onChangeSenha(value)}
-                />
-              </Form.Group>
               <Button variant="outline-light" type="submit" className="App-button-login" 
-              style={{color:"#E87715", borderColor:"#C1550C"}} 
+              style={{color:"#E87715", borderColor:"#C1550C", marginTop:"6em"}} 
                 // onClick = { async () =>
                 //   {
                 //     var idx = this.state.email.indexOf('@');
@@ -89,25 +60,19 @@ class Principal extends Component {
                 //   }
                 // }
                 >
-                <p className="App-text-button">Entrar</p>
+                <p className="App-text-button">Enviar e-mail de recuperação</p>
               </Button>
               <Button variant="outline-secondary" className="App-button-login" 
-                      onClick={ () => {
-                          this.onChangePageC(0)
-                        }
+                        onClick={ () => {
+                          this.onChangePageL(1)
                       }
+                    }
                       >
-                <p className="App-text-button">Crie sua conta</p>
+                <p className="App-text-button">Voltar ao Login</p>
               </Button>
               
+              
             </Form>
-            <Button variant="link" className="App-button-link" style={{color:"#E87715"}}
-                      onClick={ () => {
-                        this.onChangePageE(2)
-                    }}
-                    >
-                <p className="App-text-button">Esqueceu sua senha?</p>
-              </Button>
   
           </header>
         </div>
@@ -126,4 +91,4 @@ const mapStateToProps = ({ }) => {
     return {
     }
   }
-  export default connect(mapStateToProps, mapDispatchToProps)(Principal)
+  export default connect(mapStateToProps, mapDispatchToProps)(Recuperar)
