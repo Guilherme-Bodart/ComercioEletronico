@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 
 import '../../styles/principal.css'
 
-
 import NavbarP from "../../components/Navbar/Navbar"
 import Carrossel from "../../components/Carrossel/Carrossel"
 import Banheiro from "../../components/Produtos/Banheiro"
@@ -13,6 +12,8 @@ import Enfeites from "../../components/Produtos/Enfeites"
 import Favoritos from "../../components/Produtos/Favoritos"
 import SalaMesa from "../../components/Produtos/SalaMesa"
 import SalaPrateleira from "../../components/Produtos/SalaPrateleira"
+
+import { addToCart } from '../../store/actions/cart/cart'
 
 const initialState = {
 }
@@ -24,6 +25,7 @@ class Principal extends Component {
     }
    
     render(props){
+
       var home =  this.props.usuario.view === 0 ? <Favoritos/> :
                   this.props.usuario.view === 1 ? <SalaMesa/> :
                   this.props.usuario.view === 2 ? <SalaPrateleira/> :
@@ -51,6 +53,7 @@ const mapStateToProps = ({ usuario }) => {
   
   const mapDispatchToProps = dispatch => {
     return {
+      addToCart: product => dispatch(addToCart(product)),
     }
   }
   export default connect(mapStateToProps, mapDispatchToProps)(Principal)

@@ -34,8 +34,19 @@ class Principal extends Component {
      })
     }
 
-    render(props){
+    onChangeEmail = (event) => {
+      this.setState({
+        email: event.target.value
+      })
+    }
+  
+    onChangeSenha = (event) => {
+      this.setState({
+        senha: event.target.value
+     })
+    }
 
+    render(props){
       if(this.props.usuario.logado){
         return <Redirect to ="/home"/>
       }
@@ -57,7 +68,7 @@ class Principal extends Component {
                 <Form.Label>E-mail</Form.Label>
                 <Form.Control type="email" placeholder="Entre com seu e-mail"
                     className="App-form-control"  
-                    // onChange = {value => this.onChangeEmail(value)}
+                      onChange = {value => this.onChangeEmail(value)}
                     />
                 <Form.Text className="text-muted">
                 </Form.Text>
@@ -67,10 +78,10 @@ class Principal extends Component {
                 <Form.Label >Senha</Form.Label>
                 <Form.Control type="password" placeholder="Senha" 
                 className="App-form-control" 
-                // onChange = {value => this.onChangeSenha(value)}
+                  onChange = {value => this.onChangeSenha(value)}
                 />
               </Form.Group>
-              <Button variant="outline-light" type="submit" className="App-button-login" 
+              <Button variant="outline-light" className="App-button-login" 
               style={{color:"#E87715", borderColor:"#C1550C"}} 
                 onClick = { async () =>
                   {

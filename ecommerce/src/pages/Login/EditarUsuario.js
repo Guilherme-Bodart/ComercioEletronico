@@ -15,17 +15,18 @@ import { cpfMask } from "../../functions/mask"
 import logo from "../../assets/logo2.png"
 import '../../styles/Login.css'
 
+import { editarUsuario } from '../../store/actions/usuarios/usuario'
+
 
 const initialState = {
     email: '',
-    senha: '',
-    senhaConfirmada: '',
     nome: '',
     dataNascimento: '',
     telefone: '',
     cpf: '',
-    endereco: '',
+    endereco: '', 
     pageL:0,
+    pageH:0,
 }
 
 class Principal extends Component {
@@ -44,18 +45,6 @@ class Principal extends Component {
         this.setState({
           email: event.target.value
         })
-      }
-    
-      onChangeSenha = (event) => {
-        this.setState({
-          senha: event.target.value
-       })
-      }
-    
-      onChangeSenhaConfirmada = (event) => {
-        this.setState({
-          senhaConfirmada: event.target.value
-       })
       }
     
       onChangeTelefone = (event) => {
@@ -87,24 +76,41 @@ class Principal extends Component {
           pageL
        })
       }
+
+      onChangePageH = (pageH) => {
+        this.setState({
+          pageH
+       })
+      }
     
       handleSubmit(event){
         event.preventDefault()    
       }
+      
+      preencheState(cpf, dataNascimento, email, endereco, nome, telefone){
+        this.setState({
+          cpf,
+          dataNascimento: dataNascimento.substr(0, 10),
+          email,
+          endereco,
+          nome,
+          telefone
+        })
+      }
+
+      async componentDidMount(){
+        await this.preencheState(this.props.usuario.cpf, this.props.usuario.dataNascimento, this.props.usuario.email, this.props.usuario.endereco, this.props.usuario.nome, this.props.usuario.telefone)
+
+      }
+
 
     render(props){
-      // if(this.props.page.page === "cadastro"){
-      //   return <Redirect to ="/cadastro"/>
-      // }
-      // if(this.props.page.page === "enviarEmail"){
-      //   return <Redirect to ="/enviarEmail"/>
-      // }
-      // if(this.state.logado && this.props.usuario.permissao==2){
-      //   return <Redirect to ="/admin"/>
-      // }
-
       if(this.state.pageL==1){
-        return <Redirect to ="/login"/>
+        return <Redirect to ="/home"/>
+      }
+
+      if(this.state.pageH==2){
+        return <Redirect to ="/home"/>
       }
 
       let data_atual = new Date();
@@ -116,15 +122,15 @@ class Principal extends Component {
             
             <Image src={logo} className="App-logo " alt="logo" />
             
-            <Form className="App-form-cadastro" onSubmit={this.handleSubmit} >
+            <Form className="App-form-cadastro" onSubmit={this.handleSubmit} style={{height:'25em'}}>
             
-                <Form.Label className="App-text" style={{marginLeft:"-12em"}}>Cadastro</Form.Label>
+                <Form.Label className="App-text" style={{marginLeft:"-10em"}}>Editar Usuário</Form.Label>
                 <Col>
                     <Row >
                         <Col>
                         <Form.Group controlId="formBasicEmail" className="App-form-groupC">
                             <Form.Label style={{color:"#E87715", marginLeft:"-10em"}}>E-mail</Form.Label>
-                            <Form.Control type="email" placeholder="Entre com seu e-mail"
+                            <Form.Control type="email" value={this.state.email}
                                 className="App-form-control"  
                                 onChange = {value => this.onChangeEmail(value)}
                                 />
@@ -135,7 +141,7 @@ class Principal extends Component {
                         <Col>
                         <Form.Group controlId="formBasicPassword" className="App-form-groupC">
                             <Form.Label  style={{color:"#E87715", marginLeft:"-10em"}}>Nome</Form.Label>
-                            <Form.Control type="text" placeholder="Nome completo" 
+                            <Form.Control type="text" value={this.state.nome}
                             className="App-form-control" 
                             onChange = {value => this.onChangeNome(value)}
                             />
@@ -147,32 +153,8 @@ class Principal extends Component {
                     <Row >
                         <Col>
                         <Form.Group controlId="formBasicEmail" className="App-form-groupC">
-                            <Form.Label style={{color:"#E87715", marginLeft:"-10.5em"}}>Senha</Form.Label>
-                            <Form.Control type="password" placeholder="Senha da conta"
-                                className="App-form-control"  
-                                onChange = {value => this.onChangeEmail(value)}
-                                />
-                            <Form.Text className="text-muted">
-                            </Form.Text>
-                        </Form.Group>
-                        </Col>
-                        <Col>
-                        <Form.Group controlId="formBasicPassword" className="App-form-groupC">
-                            <Form.Label  style={{color:"#E87715", marginLeft:"-5.5em"}}>Confirmar senha</Form.Label>
-                            <Form.Control type="password" placeholder="Confirmação de senha" 
-                            className="App-form-control" 
-                            onChange = {value => this.onChangeSenhaConfirmada(value)}
-                            />
-                        </Form.Group>
-                        </Col>
-                        
-                        
-                    </Row>
-                    <Row >
-                        <Col>
-                        <Form.Group controlId="formBasicEmail" className="App-form-groupC">
                             <Form.Label style={{color:"#E87715", marginLeft:"-9em"}}>Endereço</Form.Label>
-                            <Form.Control type="text" placeholder="Endereço"
+                            <Form.Control type="text" value={this.state.endereco}
                                 className="App-form-control"  
                                 onChange = {value => this.onChangeEndereco(value)}
                                 />
@@ -183,7 +165,7 @@ class Principal extends Component {
                         <Col>
                         <Form.Group controlId="formBasicPassword" className="App-form-groupC">
                             <Form.Label style={{color:"#E87715", marginLeft:"-4em"}}>Data de nascimento</Form.Label>
-                            <Form.Control type="date"
+                            <Form.Control type="date" value={this.state.dataNascimento}
                             className="App-form-control" 
                             onChange = {value => this.onChangeDataNascimento(value)}
                             />
@@ -196,7 +178,7 @@ class Principal extends Component {
                         <Col>
                         <Form.Group controlId="formBasicEmail" className="App-form-groupC">
                             <Form.Label style={{color:"#E87715", marginLeft:"-9.5em"}}>Telefone</Form.Label>
-                            <Form.Control type="number" placeholder="Telefone de contato" pattern= "\([0-9]{2}\)[\s][0-9]{4}-[0-9]{4,5}"
+                            <Form.Control type="number" value={this.state.telefone}
                                 className="App-form-control"  
                                 onChange = {value => this.onChangeTelefone(value)}
                                 />
@@ -207,7 +189,7 @@ class Principal extends Component {
                         <Col>
                         <Form.Group controlId="formBasicPassword" className="App-form-groupC">
                             <Form.Label  style={{color:"#E87715", marginLeft:"-11em"}}>CPF</Form.Label>
-                            <Form.Control type="text" placeholder="CPF"  maxLength='14' value={this.state.cpf}
+                            <Form.Control type="text"  maxLength='14' value={this.state.cpf}
                             className="App-form-control" 
                             onChange = {value => this.onChangeCPF(value)}
                             />
@@ -224,37 +206,32 @@ class Principal extends Component {
                         }
                       }
                 >
-                <p className="App-text-button">Voltar para o login</p>
+                <p className="App-text-button">Voltar à página principal</p>
               </Button>
               <Button variant="outline-secondary" className="App-button-login" style={{color:"#E87715", borderColor:"#C1550C", marginLeft:"2em"}}
                 onClick = { async () => {
                     var idx = this.state.email.indexOf('@');
                     if(this.state.dataNascimento <= data_max && this.state.nome != '' && this.state.dataNascimento != '' && this.state.email != '' && idx != -1 
                     && this.state.senha != '' && this.state.senhaConfirmada != '' && this.state.cpf != ''){
-                      if(this.state.senha === this.state.senhaConfirmada){
-                        if(this.state.cpf.replace('-', '').replaceAll('.', '')){
-                          await this.props.criarUsuario({nome:this.state.nome, email:this.state.email, dataNascimento:this.state.dataNascimento, 
-                                                telefone:this.state.telefone, senha:this.state.senha, endereco:this.state.endereco, 
-                                                cpf:this.state.cpf, permissao:1,})
-                        }else{
-                          swal({
-                            title: "Error",
-                            text: 'Falha no envio, CPF inválido',
-                            icon: "error",
-                          });
-                        }
-                      }
-                      else{
+                      if(this.state.cpf.replace('-', '').replaceAll('.', '')){
+                        await this.props.editarUsuario({nome:this.state.nome, email:this.state.email, dataNascimento:this.state.dataNascimento, 
+                                              telefone:this.state.telefone, endereco:this.state.endereco, 
+                                              cpf:this.state.cpf, permissao:1,})
+                                              this.onChangePageH(2)
+                                              
+                        
+                        
+                      }else{
                         swal({
                           title: "Error",
-                          text: 'Falha no envio, senhas não coincidem',
+                          text: 'Falha no envio, CPF inválido',
                           icon: "error",
                         });
                       }
                     }
-                }
+                  }
                 }>
-                <p className="App-text-button">Criar Conta</p>
+                <p className="App-text-button">Alterar dados</p>
             </Button>
               
             </Form>
@@ -267,13 +244,15 @@ class Principal extends Component {
     }
 }
 
-const mapStateToProps = ({ }) => {
+const mapStateToProps = ({ usuario }) => {
     return {
+      usuario
     }
   }
   
   const mapDispatchToProps = dispatch => {
     return {
+      editarUsuario: usuario => dispatch(editarUsuario(usuario)),
     }
   }
   export default connect(mapStateToProps, mapDispatchToProps)(Principal)

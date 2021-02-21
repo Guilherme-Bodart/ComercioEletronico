@@ -10,6 +10,7 @@ import {
 import Principal from './pages/Principal/Principal';
 import Login from './pages/Login/Login';
 import Cadastro from './pages/Login/Cadastro';
+import EditarUsuario from './pages/Login/EditarUsuario';
 import Recuperar from './pages/Recuperar/Recuperar';
 import NovaSenha from './pages/Recuperar/NovaSenha';
 // import { pageLogin, pageCadastrar, pageRecuperar } from './store/actions/pages/page'
@@ -36,6 +37,9 @@ class App extends Component{
           </Route>
           <Route exact path="/recuperar/novasenha"> {/*Colocar o token dps */}
             <NovaSenha />
+          </Route>
+          <Route exact path="/editar">
+            <EditarUsuario />
           </Route>
           <Route >
             <Redirect to="/home">

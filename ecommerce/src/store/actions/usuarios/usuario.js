@@ -1,4 +1,4 @@
-import { LOGOUT_USUARIO, LOGIN_USUARIO, VIEW_USUARIO } from '../actionsType'
+import { LOGOUT_USUARIO, LOGIN_USUARIO, VIEW_USUARIO, EDIT_USUARIO } from '../actionsType'
 import { Redirect } from "react-router-dom";
 
 import axios from 'axios'
@@ -46,8 +46,16 @@ export const autenticarUsuario = usuario => {
 }
 
 export const armazenaInfoUsuario = usuario => {
+   
     return {
         type: LOGIN_USUARIO,
+        payload: usuario,
+    }
+}
+
+export const armazenaInfoEditUsuario = usuario => {
+    return {
+        type: EDIT_USUARIO,
         payload: usuario,
     }
 }
@@ -77,9 +85,8 @@ export const criarUsuario = usuario => {
                     text: 'Usuário cadastrado com sucesso',
                     icon: "success",
                   }).then( async (response) => {
-                    usuario = response.data
                 
-                    await dispatch(armazenaInfoUsuario(usuario))
+                    await dispatch(autenticarUsuario({email, senha}))
                   });
             })
             .catch( error => {
@@ -100,7 +107,7 @@ export const editarUsuario = usuario => {
     return async (dispatch, getState) => {
 
         const token = 'Bearer ' + getState().usuario.token
-        await axios.put("https://leds-skills.herokuapp.com/users/"+usuario.id, null, 
+        await axios.put("http://localhost:3000/users/"+usuario.id, null, 
                 { params: {
                     token,
                     nome: usuario.nome,
@@ -119,10 +126,7 @@ export const editarUsuario = usuario => {
                     text: 'Usuário atualizado com sucesso',
                     icon: "success",
                   }).then(async (value) => {
-                    usuario = response.data
-                
-                    await dispatch(armazenaInfoUsuario(usuario))
-                    return (<Redirect to= "/home"/>)
+                    await dispatch(armazenaInfoEditUsuario(usuario))
                   });
             })
             .catch( error => {

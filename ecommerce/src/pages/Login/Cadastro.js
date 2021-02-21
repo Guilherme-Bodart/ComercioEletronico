@@ -15,6 +15,8 @@ import { cpfMask } from "../../functions/mask"
 import logo from "../../assets/logo2.png"
 import '../../styles/Login.css'
 
+import { criarUsuario } from '../../store/actions/usuarios/usuario'
+
 
 const initialState = {
     email: '',
@@ -93,15 +95,10 @@ class Principal extends Component {
       }
 
     render(props){
-      // if(this.props.page.page === "cadastro"){
-      //   return <Redirect to ="/cadastro"/>
-      // }
-      // if(this.props.page.page === "enviarEmail"){
-      //   return <Redirect to ="/enviarEmail"/>
-      // }
-      // if(this.state.logado && this.props.usuario.permissao==2){
-      //   return <Redirect to ="/admin"/>
-      // }
+
+      if(this.props.usuario.logado){
+        return <Redirect to ="/home"/>
+      }
 
       if(this.state.pageL==1){
         return <Redirect to ="/login"/>
@@ -150,7 +147,7 @@ class Principal extends Component {
                             <Form.Label style={{color:"#E87715", marginLeft:"-10.5em"}}>Senha</Form.Label>
                             <Form.Control type="password" placeholder="Senha da conta"
                                 className="App-form-control"  
-                                onChange = {value => this.onChangeEmail(value)}
+                                onChange = {value => this.onChangeSenha(value)}
                                 />
                             <Form.Text className="text-muted">
                             </Form.Text>
@@ -196,7 +193,8 @@ class Principal extends Component {
                         <Col>
                         <Form.Group controlId="formBasicEmail" className="App-form-groupC">
                             <Form.Label style={{color:"#E87715", marginLeft:"-9.5em"}}>Telefone</Form.Label>
-                            <Form.Control type="number" placeholder="Telefone de contato" pattern= "\([0-9]{2}\)[\s][0-9]{4}-[0-9]{4,5}"
+                            <Form.Control type="text" maxLength='11' placeholder="Telefone de contato" 
+
                                 className="App-form-control"  
                                 onChange = {value => this.onChangeTelefone(value)}
                                 />
@@ -226,7 +224,7 @@ class Principal extends Component {
                 >
                 <p className="App-text-button">Voltar para o login</p>
               </Button>
-              <Button variant="outline-secondary" className="App-button-login" style={{color:"#E87715", borderColor:"#C1550C", marginLeft:"2em"}}
+              <Button variant="outline-secondary" type="submit" className="App-button-login" style={{color:"#E87715", borderColor:"#C1550C", marginLeft:"2em"}}
                 onClick = { async () => {
                     var idx = this.state.email.indexOf('@');
                     if(this.state.dataNascimento <= data_max && this.state.nome != '' && this.state.dataNascimento != '' && this.state.email != '' && idx != -1 
@@ -252,6 +250,13 @@ class Principal extends Component {
                         });
                       }
                     }
+                    else{
+                      swal({
+                        title: "Error",
+                        text: 'Falha no envio, campos vazios',
+                        icon: "error",
+                      });
+                    }
                 }
                 }>
                 <p className="App-text-button">Criar Conta</p>
@@ -267,13 +272,15 @@ class Principal extends Component {
     }
 }
 
-const mapStateToProps = ({ }) => {
+const mapStateToProps = ({ usuario }) => {
     return {
+      usuario
     }
   }
   
   const mapDispatchToProps = dispatch => {
     return {
+      criarUsuario: usuario => dispatch(criarUsuario(usuario)),
     }
   }
   export default connect(mapStateToProps, mapDispatchToProps)(Principal)
