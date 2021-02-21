@@ -8,6 +8,8 @@ import Image from 'react-bootstrap/Image'
 import logo from "../../assets/logo2.png"
 import '../../styles/Login.css'
 
+import { autenticarUsuario } from '../../store/actions/usuarios/usuario'
+
 const initialState = {
   pageC:1,
   pageE:1
@@ -33,18 +35,10 @@ class Principal extends Component {
     }
 
     render(props){
-      // if(this.props.page.page === "cadastro"){
-      //   return <Redirect to ="/cadastro"/>
-      // }
-      // if(this.props.page.page === "enviarEmail"){
-      //   return <Redirect to ="/enviarEmail"/>
-      // }
-      // if(this.state.logado && this.props.usuario.permissao==2){
-      //   return <Redirect to ="/admin"/>
-      // }
-      // if(this.state.logado && this.props.usuario.permissao==1){
-      //   return <Redirect to ="/user"/>
-      // }
+
+      if(this.props.usuario.logado){
+        return <Redirect to ="/home"/>
+      }
       if(this.state.pageC==0){
         return <Redirect to ="/cadastro"/>
       }
@@ -78,16 +72,12 @@ class Principal extends Component {
               </Form.Group>
               <Button variant="outline-light" type="submit" className="App-button-login" 
               style={{color:"#E87715", borderColor:"#C1550C"}} 
-                // onClick = { async () =>
-                //   {
-                //     var idx = this.state.email.indexOf('@');
-                //     if(idx != -1){
-                //       var usuario = {email:this.state.email,senha:this.state.senha}
-                //       await this.props.autenticarUsuario(usuario)
-                //       await this.onChangeLogado(this.props.usuario.logado)
-                //     }
-                //   }
-                // }
+                onClick = { async () =>
+                  {
+                      var usuario = {email:this.state.email,senha:this.state.senha}
+                      await this.props.autenticarUsuario(usuario)
+                  }
+                }
                 >
                 <p className="App-text-button">Entrar</p>
               </Button>
@@ -117,13 +107,15 @@ class Principal extends Component {
     }
 }
 
-const mapStateToProps = ({ }) => {
+const mapStateToProps = ({ usuario }) => {
     return {
+      usuario
     }
   }
   
   const mapDispatchToProps = dispatch => {
     return {
+      autenticarUsuario: usuario => dispatch(autenticarUsuario(usuario)),
     }
   }
   export default connect(mapStateToProps, mapDispatchToProps)(Principal)

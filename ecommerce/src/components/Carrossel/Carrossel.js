@@ -6,23 +6,14 @@ import Image from 'react-bootstrap/Image'
 import Button from 'react-bootstrap/Button'
 import Card from 'react-bootstrap/Card'
 import CardDeck from 'react-bootstrap/CardDeck'
-import { RiShoppingCartLine } from "react-icons/ri"
 
-import banner from "../../assets/banner.jpg"
 import banner3 from "../../assets/banner3.jpg"
-import banner4 from "../../assets/banner4.jpg"
 import banner5 from "../../assets/banner5.jpg"
 import banner6 from "../../assets/banner6.jpg"
-import mesa1 from "../../assets/produtos/mesa1.jpg"
 import mesa2 from "../../assets/produtos/mesa2.jpg"
 import mesa3 from "../../assets/produtos/mesa3.jpg"
-import mesa4 from "../../assets/produtos/mesa4.jpg"
 import mesinha1 from "../../assets/produtos/mesinha1.jpg"
 import mesinha2 from "../../assets/produtos/mesinha2.jpg"
-import mesinha3 from "../../assets/produtos/mesinha3.jpg"
-import prateleira from "../../assets/produtos/prateleira.jpg"
-import prateleira2 from "../../assets/produtos/prateleira2.jpg"
-import prateleira3 from "../../assets/produtos/prateleira3.jpg"
 import prateleira4 from "../../assets/produtos/prateleira4.jpg"
 import prateleira5 from "../../assets/produtos/prateleira5.jpg"
 import banheiro1 from "../../assets/produtos/banheiro1.jpg"
@@ -34,7 +25,7 @@ import enfeite from "../../assets/produtos/enfeite.jpg"
 
 import '../../styles/principal.css'
 
-import { logout } from '../../store/actions/usuarios/usuario'
+import { logout, viewUser } from '../../store/actions/usuarios/usuario'
 
 const initialState = {
 }
@@ -51,7 +42,7 @@ class Carrossel extends Component {
     return (
             <>
              <Carousel>
-                <Carousel.Item interval={5000000}>
+                <Carousel.Item interval={10000}>
                     <Image src={banner3}  className="Principal-banner" alt="First" />
                     <Carousel.Caption>
                         <CardDeck style={{color:"#C1550C", maxWidth:"30em",marginLeft:"26%"}}>
@@ -63,7 +54,7 @@ class Carrossel extends Component {
                                 
                                 <Card.Footer>
                                     <Button variant="top" style={{height:"2em", marginBottom:"0.5em", color:"#E87715"}}>
-                                        <small onClick={()=>alert('oi')} >Veja mais...</small>
+                                        <small onClick={()=>{ this.props.viewUser(1)}} >Veja mais...</small>
                                     </Button>
                                 </Card.Footer>
                             </Card>
@@ -75,7 +66,7 @@ class Carrossel extends Component {
                                 
                                 <Card.Footer>
                                     <Button variant="top" style={{height:"2em", marginBottom:"0.5em", color:"#E87715"}}>
-                                        <small onClick={()=>alert('oi')} >Veja mais...</small>
+                                        <small onClick={()=>{ this.props.viewUser(2)}} >Veja mais...</small>
                                     </Button>
                                 </Card.Footer>
                             </Card>
@@ -86,7 +77,7 @@ class Carrossel extends Component {
                     </Carousel.Caption>
                     
                 </Carousel.Item>
-                <Carousel.Item interval={5000}>
+                <Carousel.Item interval={10000}>
                    <Image src={banner6} className="Principal-banner"  alt="Second" />
                     <Carousel.Caption>
                         <CardDeck style={{color:"#C1550C", maxWidth:"15em", marginLeft:"38.5%"}}>
@@ -97,7 +88,7 @@ class Carrossel extends Component {
                                 
                                 <Card.Footer>
                                     <Button variant="top" style={{height:"2em", marginBottom:"0.5em", color:"#E87715"}}>
-                                        <small onClick={()=>alert('oi')} >Veja mais...</small>
+                                        <small onClick={()=>{ this.props.viewUser(3)}} >Veja mais...</small>
                                     </Button>
                                 </Card.Footer>
                             </Card>
@@ -105,7 +96,7 @@ class Carrossel extends Component {
                     </Carousel.Caption>
                 </Carousel.Item>
 
-                <Carousel.Item interval={5000}>
+                <Carousel.Item interval={10000}>
                     <Image src={banner5} className="Principal-banner"  alt="Third" />
                     <Carousel.Caption>
                        <CardDeck style={{color:"#C1550C", maxWidth:"45em",marginLeft:"15%"}}>
@@ -117,7 +108,7 @@ class Carrossel extends Component {
                                 
                                 <Card.Footer>
                                     <Button variant="top" style={{height:"2em", marginBottom:"0.5em", color:"#E87715"}}>
-                                        <small onClick={()=>alert('oi')} >Veja mais...</small>
+                                        <small onClick={()=>{ this.props.viewUser(4)}} >Veja mais...</small>
                                     </Button>
                                 </Card.Footer>
                             </Card>
@@ -129,19 +120,19 @@ class Carrossel extends Component {
                                 
                                 <Card.Footer>
                                     <Button variant="top" style={{height:"2em", marginBottom:"0.5em", color:"#E87715"}}>
-                                        <small onClick={()=>alert('oi')} >Veja mais...</small>
+                                        <small onClick={()=>{ this.props.viewUser(5)}} >Veja mais...</small>
                                     </Button>
                                 </Card.Footer>
                             </Card>
 
                             <Card>
-                                <Card.Title style={{marginTop:"0.5em"}} >Decorações</Card.Title>
+                                <Card.Title style={{marginTop:"0.5em"}} >Enfeites</Card.Title>
                                 <Card.Img variant="top" src={buda} className="Principal-banner-image" />
                                 <Card.Img variant="top" src={enfeite} className="Principal-banner-image" />
                                 
                                 <Card.Footer>
                                     <Button variant="top" style={{height:"2em", marginBottom:"0.5em",maxWidth:"40em", color:"#E87715"}}>
-                                        <small onClick={()=>alert('oi')} >Veja mais...</small>
+                                        <small onClick={()=>{ this.props.viewUser(6)}} >Veja mais...</small>
                                     </Button>
                                 </Card.Footer>
                             </Card>
@@ -163,6 +154,7 @@ const mapStateToProps = ({ usuario,  }) => {
 const mapDispatchToProps = dispatch => {
   return {
     logout: () => dispatch(logout()),
+    viewUser: (view) => dispatch(viewUser(view)),
 
   }
 }
