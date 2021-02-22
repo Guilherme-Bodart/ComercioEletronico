@@ -13,13 +13,12 @@ import Cadastro from './pages/Login/Cadastro';
 import EditarUsuario from './pages/Login/EditarUsuario';
 import Recuperar from './pages/Recuperar/Recuperar';
 import NovaSenha from './pages/Recuperar/NovaSenha';
-// import { pageLogin, pageCadastrar, pageRecuperar } from './store/actions/pages/page'
 
 class App extends Component{
   render(props){
     return (
         <Switch>
-          <Route exact path="/" >
+          <Route exact path="/" > {/* Path vazio vai pra home */}
             <Redirect to="/home">              
             </Redirect>
           </Route>
@@ -41,7 +40,7 @@ class App extends Component{
           <Route exact path="/editar">
             <EditarUsuario />
           </Route>
-          <Route >
+          <Route > {/* Qualquer path que não existe vai pra home */}
             <Redirect to="/home">
             </Redirect>
           </Route>

@@ -36,14 +36,14 @@ class Favoritos extends Component {
     return (
         <Container>
             <Row style={{fontSize:"2em", fontFamily:"Arial, Helvetica, sans-serif"}}>
-                <Col md={{ span: 4, offset: 6  }}>Enfeites</Col>
+                <Col md={{ span: 4, offset: 5  }}>Enfeites</Col>
             </Row>
             <Row style={{fontSize:"1.2em", fontFamily:"Arial, Helvetica, sans-serif", marginRight:"2em", marginBottom:"2em"}}>
-                <Col md={{ span: 5, offset: 5  }}>Lista dos enfeites para alegrar seu lar!</Col>
+                <Col md={{ span: 5, offset: 4  }}>Lista dos enfeites para alegrar seu lar!</Col>
             </Row>
             <Row >
                 <Col style={{marginLeft:"2em"}} md={{ span: 3, offset: 1 }}>
-                    <a href="/home">
+                    <a >
                         <Image src={item1.image} className="Principal-favorito-image" />
                     </a>
                     <p style={{marginLeft:"7em",marginTop:"1em", marginBottom:"-0.1em"}}>R$ {item1.preco}</p>
@@ -59,7 +59,7 @@ class Favoritos extends Component {
                       }}>Adicionar ao Carrinho</Button>
                 </Col>
                 <Col md={{ span: 3, offset: 1 }}>
-                    <a href="/home">
+                    <a >
                         <Image src={item2.image} className="Principal-favorito-image" />
                     </a>
                     <p style={{marginLeft:"7em",marginTop:"1em", marginBottom:"-0.1em"}}>R$ {item2.preco}</p>
@@ -75,7 +75,7 @@ class Favoritos extends Component {
                       }}>Adicionar ao Carrinho</Button>
                 </Col>
                 <Col md={{ span: 3, offset: 1 }}>
-                    <a href="/home">
+                    <a >
                         <Image src={item3.image} className="Principal-favorito-image" />
                     </a>
                     <p style={{marginLeft:"7em",marginTop:"1em", marginBottom:"-0.1em"}}>R$ {item3.preco}</p>
@@ -93,7 +93,7 @@ class Favoritos extends Component {
             </Row>
             <Row >
                 <Col style={{marginLeft:"2em"}} md={{ span: 3, }}>
-                    <a href="/home">
+                    <a >
                         <Image src={item4.image} className="Principal-favorito-image" />
                     </a>
                     <p style={{marginLeft:"7em",marginTop:"1em", marginBottom:"-0.1em"}}>R$ {item4.preco}</p>

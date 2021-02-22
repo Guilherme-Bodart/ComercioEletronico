@@ -12,7 +12,6 @@ const reducer = (state = initialState, action) => {
          ...state, cart: [...state.cart, action.payload]
         }
     case CLEAN_CART:
-      alert('oi')
       return initialState
 
     case REMOVE_ITEM:

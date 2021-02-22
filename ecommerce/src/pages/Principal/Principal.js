@@ -24,6 +24,8 @@ class Principal extends Component {
         this.state = initialState
     }
    
+    
+
     render(props){
 
       var home =  this.props.usuario.view === 0 ? <Favoritos/> :

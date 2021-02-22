@@ -38,14 +38,14 @@ class Favoritos extends Component {
     return (
         <Container>
             <Row style={{fontSize:"2em", fontFamily:"Arial, Helvetica, sans-serif", marginRight:"2em"}}>
-                <Col md={{ span: 4, offset: 6  }}>Sala de Estar</Col>
+                <Col md={{ span: 4, offset: 5  }}>Sala de Estar</Col>
             </Row>
             <Row style={{fontSize:"1.2em", fontFamily:"Arial, Helvetica, sans-serif", marginRight:"2em", marginBottom:"2em"}}>
-                <Col md={{ span: 5, offset: 5  }}>Lista com as platereiras para seu canto!</Col>
+                <Col md={{ span: 5, offset: 4  }}>Lista com as platereiras para seu canto!</Col>
             </Row>
             <Row >
                 <Col style={{marginLeft:"2em"}} md={{ span: 3, offset: 1 }}>
-                    <a href="/home">
+                    <a >
                         <Image src={item1.image} className="Principal-favorito-image" />
                     </a>
                     <p style={{marginLeft:"7em",marginTop:"1em", marginBottom:"-0.1em"}}>R$ {item1.preco}</p>
@@ -61,7 +61,7 @@ class Favoritos extends Component {
                       }}>Adicionar ao Carrinho</Button>
                 </Col>
                 <Col md={{ span: 3, offset: 1 }}>
-                    <a href="/home">
+                    <a >
                         <Image src={item2.image} className="Principal-favorito-image" />
                     </a>
                     <p style={{marginLeft:"7em",marginTop:"1em", marginBottom:"-0.1em"}}>R$ {item2.preco}</p>
@@ -69,10 +69,15 @@ class Favoritos extends Component {
                     onClick={()=>{
                         var item = { image : item2.image, preco: item2.preco, id: Math.random() }
                         this.props.addToCart(item)
+                        swal({
+                          title: "Sucesso",
+                          text: 'Produto adicionado ao carrinho',
+                          icon: "success",
+                        })
                       }}>Adicionar ao Carrinho</Button>
                 </Col>
                 <Col md={{ span: 3, offset: 1 }}>
-                    <a href="/home">
+                    <a >
                         <Image src={item3.image} className="Principal-favorito-image" />
                     </a>
                     <p style={{marginLeft:"7em",marginTop:"1em", marginBottom:"-0.1em"}}>R$ {item3.preco}</p>
@@ -80,12 +85,17 @@ class Favoritos extends Component {
                     onClick={()=>{
                         var item = { image : item3.image, preco: item3.preco, id: Math.random() }
                         this.props.addToCart(item)
+                        swal({
+                          title: "Sucesso",
+                          text: 'Produto adicionado ao carrinho',
+                          icon: "success",
+                        })
                       }}>Adicionar ao Carrinho</Button>
                 </Col>
             </Row>
             <Row > 
                 <Col style={{marginLeft:"2em"}} md={{ span: 3, offset: 1 }}>
-                    <a href="/home">
+                    <a >
                         <Image src={item4.image} className="Principal-favorito-image" />
                     </a>
                     <p style={{marginLeft:"7em",marginTop:"1em", marginBottom:"-0.1em"}}>R$ {item4.preco}</p>
@@ -93,10 +103,15 @@ class Favoritos extends Component {
                     onClick={()=>{
                         var item = { image : item4.image, preco: item4.preco, id: Math.random() }
                         this.props.addToCart(item)
+                        swal({
+                          title: "Sucesso",
+                          text: 'Produto adicionado ao carrinho',
+                          icon: "success",
+                        })
                       }}>Adicionar ao Carrinho</Button>
                 </Col>
                 <Col md={{ span: 3, offset: 1 }}>
-                    <a href="/home">
+                    <a >
                         <Image src={item5.image} className="Principal-favorito-image" />
                     </a>
                     <p style={{marginLeft:"7em",marginTop:"1em", marginBottom:"-0.1em"}}>R$ {item5.preco}</p>
@@ -104,6 +119,11 @@ class Favoritos extends Component {
                     onClick={()=>{
                         var item = { image : item5.image, preco: item5.preco, id: Math.random() }
                         this.props.addToCart(item)
+                        swal({
+                          title: "Sucesso",
+                          text: 'Produto adicionado ao carrinho',
+                          icon: "success",
+                        })
                       }}>Adicionar ao Carrinho</Button>
                 </Col>
             </Row>

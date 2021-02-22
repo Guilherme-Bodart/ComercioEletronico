@@ -53,7 +53,7 @@ class Favoritos extends Component {
             </Row>
             <Row >
                 <Col style={{marginLeft:"2em"}} md={{ span: 3, offset: 1 }}>
-                    <a href="/home">
+                    <a >
                         <Image src={item1.image} className="Principal-favorito-image" />
                     </a>
                     <p style={{marginLeft:"7em",marginTop:"1em", marginBottom:"-0.1em"}}>R$ {item1.preco}</p>
@@ -69,7 +69,7 @@ class Favoritos extends Component {
                       }}>Adicionar ao Carrinho</Button>
                 </Col>
                 <Col md={{ span: 3, offset: 1 }}>
-                    <a href="/home">
+                    <a >
                         <Image src={item2.image} className="Principal-favorito-image" />
                     </a>
                     <p style={{marginLeft:"7em",marginTop:"1em", marginBottom:"-0.1em"}}>R$ {item2.preco}</p>
@@ -85,7 +85,7 @@ class Favoritos extends Component {
                       }}>Adicionar ao Carrinho</Button>
                 </Col>
                 <Col md={{ span: 3, offset: 1 }}>
-                    <a href="/home">
+                    <a >
                         <Image src={item3.image} className="Principal-favorito-image" />
                     </a>
                     <p style={{marginLeft:"7em",marginTop:"1em", marginBottom:"-0.1em"}}>R$ {item3.preco}</p>
@@ -103,7 +103,7 @@ class Favoritos extends Component {
             </Row>
             <Row > 
                 <Col style={{marginLeft:"2em"}} md={{ span: 3, offset: 1 }}>
-                    <a href="/home">
+                    <a >
                         <Image src={item4.image} className="Principal-favorito-image" />
                     </a>
                     <p style={{marginLeft:"7em",marginTop:"1em", marginBottom:"-0.1em"}}>R$ {item4.preco}</p>
@@ -119,7 +119,7 @@ class Favoritos extends Component {
                       }}>Adicionar ao Carrinho</Button>
                 </Col>
                 <Col md={{ span: 3, offset: 1 }}>
-                    <a href="/home">
+                    <a >
                         <Image src={item5.image} className="Principal-favorito-image" />
                     </a>
                     <p style={{marginLeft:"7em",marginTop:"1em", marginBottom:"-0.1em"}}>R$ {item5.preco}</p>
@@ -135,7 +135,7 @@ class Favoritos extends Component {
                       }}>Adicionar ao Carrinho</Button>
                 </Col>
                 <Col md={{ span: 3, offset: 1 }}>
-                    <a href="/home">
+                    <a >
                         <Image src={item6.image} className="Principal-favorito-image" /></a>
                     <p style={{marginLeft:"7em",marginTop:"1em", marginBottom:"-0.1em"}}>R$ {item6.preco}</p>
                     <Button variant="outline-secondary" style={{marginLeft:"3em", marginBottom:"1em"}}
@@ -152,7 +152,7 @@ class Favoritos extends Component {
             </Row>
             <Row >
                 <Col style={{marginLeft:"2em"}} md={{ span: 3 }}>
-                    <a href="/home">
+                    <a >
                         <Image src={item7.image} className="Principal-favorito-image" />
                     </a>
                     <p style={{marginLeft:"7em",marginTop:"1em", marginBottom:"-0.1em"}}>R$ {item7.preco}</p>
@@ -168,7 +168,7 @@ class Favoritos extends Component {
                       }}>Adicionar ao Carrinho</Button>
                 </Col>
                 <Col md={{ span: 3, offset: 1 }}>
-                    <a href="/home">
+                    <a >
                         <Image src={item8.image} className="Principal-favorito-image" />
                     </a>
                     <p style={{marginLeft:"7em",marginTop:"1em", marginBottom:"-0.1em"}}>R$ {item8.preco}</p>
@@ -184,7 +184,7 @@ class Favoritos extends Component {
                       }}>Adicionar ao Carrinho</Button>
                 </Col>
                 <Col md={{ span: 3, offset: 1 }}>
-                    <a href="/home">
+                    <a >
                         <Image src={item9.image} className="Principal-favorito-image" />
                     </a>
                     <p style={{marginLeft:"7em",marginTop:"1em", marginBottom:"-0.1em"}}>R$ {item9.preco}</p>

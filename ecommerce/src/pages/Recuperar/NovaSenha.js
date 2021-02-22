@@ -25,18 +25,9 @@ class NovaSenha extends Component {
     }
 
     render(props){
-      // if(this.props.page.page === "cadastro"){
-      //   return <Redirect to ="/cadastro"/>
-      // }
-      // if(this.props.page.page === "enviarEmail"){
-      //   return <Redirect to ="/enviarEmail"/>
-      // }
-      // if(this.state.logado && this.props.usuario.permissao==2){
-      //   return <Redirect to ="/admin"/>
-      // }
-      // if(this.state.logado && this.props.usuario.permissao==1){
-      //   return <Redirect to ="/user"/>
-      // }
+      if(this.props.usuario.logado){
+        return <Redirect to ="/home"/>
+      }
 
       if(this.state.pageL==1){
         return <Redirect to ="/login"/>
@@ -48,7 +39,7 @@ class NovaSenha extends Component {
             
             <Image src={logo} className="App-logo " alt="logo" />
             <Form className="App-form " onSubmit={this.handleSubmit} >
-              <Form.Label className="App-text" style={{width:"9em"}}>Recuperar senha</Form.Label>
+              <Form.Label className="App-text" style={{width:"7em"}}>Trocar senha</Form.Label>
               <Form.Group controlId="formBasicEmail" className="App-form-group">
                 <Form.Label style={{color:"#E87715", marginLeft:"-15em",marginTop:"1em"}}>Nova senha</Form.Label>
                 <Form.Control type="email" placeholder="Nova senha"
@@ -100,8 +91,9 @@ class NovaSenha extends Component {
     }
 }
 
-const mapStateToProps = ({ }) => {
+const mapStateToProps = ({ usuario }) => {
     return {
+      usuario
     }
   }
   

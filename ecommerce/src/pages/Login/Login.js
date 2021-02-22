@@ -107,7 +107,7 @@ class Principal extends Component {
                         this.onChangePageE(2)
                     }}
                     >
-                <p className="App-text-button">Esqueceu sua senha?</p>
+                <p className="App-text-button">Quer mudar a senha ou Esqueceu sua senha?</p>
               </Button>
   
           </header>

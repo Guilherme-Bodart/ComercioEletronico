@@ -8,16 +8,22 @@ import Button from 'react-bootstrap/Button'
 import Dropdown from 'react-bootstrap/Dropdown'
 import FormControl from 'react-bootstrap/FormControl'
 import Image from 'react-bootstrap/Image'
+import Modal from 'react-bootstrap/Modal'
+import swal from 'sweetalert';
 import { RiShoppingCartLine } from "react-icons/ri"
+
+import ModalP from "../Modal/Modal"
 
 import logo from "../../assets/logo2.png"
 import '../../styles/principal.css'
 
 import { logout, viewUser } from '../../store/actions/usuarios/usuario'
+import { addToCart, cleanCart, removeItem } from '../../store/actions/cart/cart'
 
 const initialState = {
   pageL:0,
   pageE:0,
+  showModal:false,
 }
 
 class NavbarP extends Component {
@@ -39,6 +45,12 @@ class NavbarP extends Component {
    })
   }
 
+  onChangeModal = (showModal) => {
+    this.setState({
+      showModal
+   })
+  }
+
   render(props) {
     var lista = this.props.usuario.nome.split(" ")
     var nome1 = lista[0] ? lista[0] : ""
@@ -52,7 +64,6 @@ class NavbarP extends Component {
       return <Redirect to ="/editar"/>
     }
 
-    var qtdCompras = 5
     var logado = this.props.usuario.logado ? <Dropdown className="ml-auto">
                           <Dropdown.Toggle variant="dark" id="dropdown-basic" style={{fontSize:"1em",marginRight:"0.1em", color:"#E87715"}}>
                             {nome1} {nome2}
@@ -60,7 +71,23 @@ class NavbarP extends Component {
                           <Dropdown.Menu>
                             <Dropdown.Item 
                               onClick={ () => {
-                                this.props.logout()
+                                if(this.props.cart.cart.length>0){
+                                  swal({
+                                    title: "Tem certeza?",
+                                    text: 'Seu carrinho de compra será limpado ao deslogar, tem certeza?',
+                                    icon: "warning",
+                                    buttons: true,
+                                    dangerMode: true,
+                                  }).then((willDelete)=>{
+                                    if(willDelete){
+                                      this.props.cleanCart()
+                                      this.props.logout()
+                                    }
+                                  })
+                                }
+                                else{
+                                  this.props.logout()
+                                }
                               }}>Logout</Dropdown.Item>
                               <Dropdown.Item 
                               onClick={ () => {
@@ -72,6 +99,7 @@ class NavbarP extends Component {
                           onClick={ () => {
                             this.onChangePageL(1)
                         }}>Olá, faça seu login</Button>
+                        
 
     return (
             <>
@@ -86,10 +114,27 @@ class NavbarP extends Component {
                 </Nav>
                   {logado}
                 <Button variant="dark" style={{fontSize:"1.5em", marginRight:"1em", color:"#E87715"}} onClick={ () => {
-                                this.props.logout()
+                          this.onChangeModal(!this.state.showModal)
+                              
+                                
                               }}>
                   <RiShoppingCartLine style={{ fontSize:"1.7em", color:"#E87715"}} /> {this.props.cart.cart.length}
                 </Button>
+                <Modal show={this.state.showModal} >
+                  <Modal.Header closeButton>
+                    <Modal.Title>Carrinho de Compras</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body><ModalP/></Modal.Body>
+                  <Modal.Footer>
+                    <Button variant="primary" onClick={ () => {
+                          this.onChangeModal(!this.state.showModal)
+                              
+                                
+                              }}>
+                      Close
+                    </Button>
+                  </Modal.Footer>
+                </Modal>
             </Navbar>            
             </>
       );
@@ -106,6 +151,10 @@ const mapDispatchToProps = dispatch => {
   return {
     logout: () => dispatch(logout()),
     viewUser: (view) => dispatch(viewUser(view)),
+    addToCart: product => dispatch(addToCart(product)),    
+    cleanCart: () => dispatch(cleanCart()),
+    removeItem: product => dispatch(removeItem(product)),
+
 
   }
 }

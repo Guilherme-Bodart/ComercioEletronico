@@ -29,7 +29,6 @@ class Favoritos extends Component {
 
 
   render(props) {
-    alert(JSON.stringify(this.props.cart.cart))
     var item1 = {image: mesa1, preco: 580}
     var item2 = {image: mesa2, preco: 650}
     var item3 = {image: mesa3, preco: 250}
@@ -37,14 +36,14 @@ class Favoritos extends Component {
     return (
         <Container>
             <Row style={{fontSize:"2em", fontFamily:"Arial, Helvetica, sans-serif", marginRight:"2em"}}>
-                <Col md={{ span: 4, offset: 6  }}>Sala de Estar</Col>
+                <Col md={{ span: 4, offset: 5  }}>Sala de Estar</Col>
             </Row>
             <Row style={{fontSize:"1.2em", fontFamily:"Arial, Helvetica, sans-serif", marginRight:"2em", marginBottom:"2em"}}>
-                <Col md={{ span: 5, offset: 5  }}>Lista com os produtos para sua sala!</Col>
+                <Col md={{ span: 5, offset: 4  }}>Lista com os produtos para sua sala!</Col>
             </Row>
             <Row >
                 <Col style={{marginLeft:"2em"}} md={{ span: 3, offset: 1 }}>
-                    <a href="/home">
+                    <a >
                         <Image src={item1.image} className="Principal-favorito-image" />
                     </a>
                     <p style={{marginLeft:"7em",marginTop:"1em", marginBottom:"-0.1em"}}>R$ {item1.preco}</p>
@@ -60,7 +59,7 @@ class Favoritos extends Component {
                       }}>Adicionar ao Carrinho</Button>
                 </Col>
                 <Col md={{ span: 3, offset: 1 }}>
-                    <a href="/home">
+                    <a >
                         <Image src={item2.image} className="Principal-favorito-image" />
                     </a>
                     <p style={{marginLeft:"7em",marginTop:"1em", marginBottom:"-0.1em"}}>R$ {item2.preco}</p>
@@ -76,7 +75,7 @@ class Favoritos extends Component {
                       }}>Adicionar ao Carrinho</Button>
                 </Col>
                 <Col md={{ span: 3, offset: 1 }}>
-                    <a href="/home">
+                    <a >
                         <Image src={item3.image} className="Principal-favorito-image" />
                     </a>
                     <p style={{marginLeft:"7em",marginTop:"1em", marginBottom:"-0.1em"}}>R$ {item3.preco}</p>
@@ -94,7 +93,7 @@ class Favoritos extends Component {
             </Row>
             <Row > 
                 <Col style={{marginLeft:"2em"}} md={{ span: 3, offset: 1 }}>
-                    <a href="/home">
+                    <a >
                         <Image src={item4.image} className="Principal-favorito-image" />
                     </a>
                     <p style={{marginLeft:"7em",marginTop:"1em", marginBottom:"-0.1em"}}>R$ {item4.preco}</p>

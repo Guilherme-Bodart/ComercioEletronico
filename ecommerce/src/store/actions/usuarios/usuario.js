@@ -21,12 +21,11 @@ export const viewUser = (view) => {
 export const autenticarUsuario = usuario => {
     return async (dispatch) => {
         const { email, senha } = usuario
-        await axios.post("http://localhost:3000/auth/authenticate", null,  { params: {
+        await axios.post("https://comercio-eletronico-ifes.herokuapp.com/auth/authenticate", null,  { params: {
             email,
             senha
           }})
             .then(async response => {
-                
                 usuario = response.data
                 
                 await dispatch(armazenaInfoUsuario(usuario))
@@ -66,7 +65,7 @@ export const criarUsuario = usuario => {
         const { nome, email, senha, cpf, telefone, endereco, dataNascimento, permissao } = usuario
 
 
-        await axios.post("http://localhost:3000/auth/register", null, 
+        await axios.post("https://comercio-eletronico-ifes.herokuapp.com/auth/register", null, 
                 { params: {
                     nome,
                     email,
@@ -107,7 +106,7 @@ export const editarUsuario = usuario => {
     return async (dispatch, getState) => {
 
         const token = 'Bearer ' + getState().usuario.token
-        await axios.put("http://localhost:3000/users/"+usuario.id, null, 
+        await axios.put("https://comercio-eletronico-ifes.herokuapp.com/users/"+usuario.id, null, 
                 { params: {
                     token,
                     nome: usuario.nome,
@@ -146,7 +145,7 @@ export const enviarEmailReset = email => {
 
     return async (dispatch) =>  {
 
-        await axios.post("http://localhost:3000/auth/forgot_password", null, 
+        await axios.post("https://comercio-eletronico-ifes.herokuapp.com/auth/forgot_password", null, 
                 { params: {
                     email
                     }
@@ -178,7 +177,7 @@ export const recuperarSenha = usuario => {
         const { senha, token } = usuario
 
 
-        await axios.post("http://localhost:3000/auth/reset_password", null, 
+        await axios.post("https://comercio-eletronico-ifes.herokuapp.com/auth/reset_password", null, 
                 { params: {
                     senha,
                     token

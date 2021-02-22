@@ -30,6 +30,10 @@ class Recuperar extends Component {
         return <Redirect to ="/login"/>
       }
 
+      if(this.props.usuario.logado){
+        return <Redirect to ="/home"/>
+      }
+
       return (
         <div className="App">
           <header className="App-header">
@@ -60,7 +64,7 @@ class Recuperar extends Component {
                 //   }
                 // }
                 >
-                <p className="App-text-button">Enviar e-mail de recuperação</p>
+                <p className="App-text-button">Enviar e-mail de troca de senha</p>
               </Button>
               <Button variant="outline-secondary" className="App-button-login" 
                         onClick={ () => {
@@ -82,8 +86,9 @@ class Recuperar extends Component {
     }
 }
 
-const mapStateToProps = ({ }) => {
+const mapStateToProps = ({ usuario }) => {
     return {
+      usuario
     }
   }
   
