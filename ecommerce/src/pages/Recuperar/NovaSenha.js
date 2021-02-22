@@ -1,15 +1,22 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
-import { Redirect } from "react-router-dom";
+import { Redirect, withRouter } from "react-router-dom";
 
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Image from 'react-bootstrap/Image'
+import swal from 'sweetalert';
+
 import logo from "../../assets/logo2.png"
 import '../../styles/Login.css'
 
+import { recuperarSenha } from '../../store/actions/usuarios/usuario'
+
+
 const initialState = {
-  pageL:0
+  pageL:0,
+  senha: '',
+  senhaConfirmada: '',
 }
 
 class NovaSenha extends Component {
@@ -23,6 +30,19 @@ class NovaSenha extends Component {
         pageL
      })
     }
+
+    onChangeSenha = (event) => {
+      this.setState({
+        senha: event.target.value
+     })
+    }
+  
+    onChangeSenhaConfirmada = (event) => {
+      this.setState({
+        senhaConfirmada: event.target.value
+     })
+    }
+  
 
     render(props){
       if(this.props.usuario.logado){
@@ -42,10 +62,9 @@ class NovaSenha extends Component {
               <Form.Label className="App-text" style={{width:"7em"}}>Trocar senha</Form.Label>
               <Form.Group controlId="formBasicEmail" className="App-form-group">
                 <Form.Label style={{color:"#E87715", marginLeft:"-15em",marginTop:"1em"}}>Nova senha</Form.Label>
-                <Form.Control type="email" placeholder="Nova senha"
+                <Form.Control type="password" placeholder="Nova senha"
                     className="App-form-control"  
-                    // onChange = {value => this.onChangeEmail(value)}
-                    />
+                    onChange = {value => this.onChangeSenha(value)}/>
                 <Form.Text className="text-muted">
                 </Form.Text>
               </Form.Group>
@@ -54,23 +73,34 @@ class NovaSenha extends Component {
                 <Form.Label style={{color:"#E87715", marginRight:"10em"}}>Confirmação da Senha</Form.Label>
                 <Form.Control type="password" placeholder="Confirmar nova senha" 
                 className="App-form-control" 
-                // onChange = {value => this.onChangeSenha(value)}
-                />
+                onChange = {value => this.onChangeSenhaConfirmada(value)}/>
               </Form.Group>
-              <Button variant="outline-light" type="submit" className="App-button-login" 
+              <Button variant="outline-light" className="App-button-login" 
               style={{color:"#E87715", borderColor:"#C1550C"}} 
-                // onClick = { async () =>
-                //   {
-                //     var idx = this.state.email.indexOf('@');
-                //     if(idx != -1){
-                //       var usuario = {email:this.state.email,senha:this.state.senha}
-                //       await this.props.autenticarUsuario(usuario)
-                //       await this.onChangeLogado(this.props.usuario.logado)
-                //     }
-                //   }
-                // }
+              onClick = { async () => {
+                    if(this.state.senha != '' && this.state.senhaConfirmada != ''){
+                      if(this.state.senha === this.state.senhaConfirmada){
+                        await this.props.recuperarSenha({senha:this.state.senha, token: this.props.match.params.token})
+                      }
+                      else{
+                        swal({
+                          title: "Error",
+                          text: 'Falha no envio, senhas não coincidem',
+                          icon: "error",
+                        });
+                      }
+                    }
+                    else{
+                      swal({
+                        title: "Error",
+                        text: 'Falha no envio, campos vazios',
+                        icon: "error",
+                      });
+                    }
+                  }
+                }
                 >
-                <p className="App-text-button">Entrar</p>
+                <p className="App-text-button">Alterar</p>
               </Button>
               <Button variant="outline-secondary" className="App-button-login" 
                           onClick={ () => {
@@ -99,6 +129,7 @@ const mapStateToProps = ({ usuario }) => {
   
   const mapDispatchToProps = dispatch => {
     return {
+      recuperarSenha: usuario => dispatch(recuperarSenha(usuario)),
     }
   }
-  export default connect(mapStateToProps, mapDispatchToProps)(NovaSenha)
+  export default connect(mapStateToProps, mapDispatchToProps)(withRouter(NovaSenha))

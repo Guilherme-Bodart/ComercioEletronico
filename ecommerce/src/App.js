@@ -34,16 +34,16 @@ class App extends Component{
           <Route exact path="/recuperar">
             <Recuperar />
           </Route>
-          <Route exact path="/recuperar/novasenha"> {/*Colocar o token dps */}
+          <Route exact path="/recuperar/:token"> {/*Colocar o token dps */}
             <NovaSenha />
           </Route>
           <Route exact path="/editar">
             <EditarUsuario />
           </Route>
-          <Route > {/* Qualquer path que não existe vai pra home */}
+          {/* <Route > {/* Qualquer path que não existe vai pra home 
             <Redirect to="/home">
             </Redirect>
-          </Route>
+          </Route> */}
           
         </Switch>
     )

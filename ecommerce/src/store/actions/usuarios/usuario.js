@@ -144,7 +144,6 @@ export const editarUsuario = usuario => {
 export const enviarEmailReset = email => {
 
     return async (dispatch) =>  {
-
         await axios.post("https://comercio-eletronico-ifes.herokuapp.com/auth/forgot_password", null, 
                 { params: {
                     email
@@ -175,7 +174,6 @@ export const recuperarSenha = usuario => {
 
     return async (dispatch) =>  {
         const { senha, token } = usuario
-
 
         await axios.post("https://comercio-eletronico-ifes.herokuapp.com/auth/reset_password", null, 
                 { params: {
