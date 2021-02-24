@@ -108,7 +108,7 @@ class NavbarP extends Component {
                   <Image src={logo} className="Principal-logo" alt="logo" style={{marginLeft:"0.5em"}}/>
                 </a>
                 <Nav >
-                <Nav.Link href="/home/produtos" onClick={()=>{this.props.viewUser(0)}} style={{fontSize:"1.1em", color:"#E87715", marginLeft:"2em", }}>Produtos</Nav.Link>               
+                <Nav.Link href="/home" onClick={()=>{this.props.viewUser(0)}} style={{fontSize:"1.1em", color:"#E87715", marginLeft:"2em", }}>Produtos</Nav.Link>               
                 <FormControl type="text" placeholder="Search" style={{ width:"20em", marginLeft:"1em"}} />
                 <Button variant="dark" style={{color:"#E87715", borderColor:"#C1550C", marginLeft:"0.5em"}}>Search</Button>
                 </Nav>
